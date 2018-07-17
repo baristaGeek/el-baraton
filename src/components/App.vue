@@ -1,26 +1,33 @@
 <template>
   <div id="app">
     <div class="banner">
-      <img
-        src="https://vuejs.org/images/logo.png"
-        width="100"
-        alt="vue"
-        class="logo"
-      />
-      <h1>Welcome to Vue.js</h1>
+      <h1>El Baratón</h1>
     </div>
     <div class="bottom">
       To get started, edit <code>./src/components/App.vue</code> and save to reload.<br/>
       <span class="fade">
-        Checkout <code>./README.md</code> for more usages.
+        {{products}}
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import productsJson from '../json-data/products.json'
+import categoriesJson from '../json-data/categories.json'
   export default {
-    name: 'app'
+    name: 'app',
+    data () {
+      return {
+        products: [],
+        categories: []
+      }
+    },
+    created () {
+      let vc = this
+      vc.products = productsJson
+      vc.categories = categoriesJson
+    }
   }
 </script>
 
@@ -55,7 +62,7 @@
   }
 
   .banner {
-    height: 200px;
+    height: 50px;
     background-color: #f6f6f6;
     padding: 50px 10px;
   }
@@ -68,14 +75,5 @@
 
   .fade {
     font-size: 14px;
-  }
-
-  .logo {
-    animation: spin 4s 1s infinite linear
-  }
-
-  @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
   }
 </style>
