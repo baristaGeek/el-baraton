@@ -1,8 +1,19 @@
 <template>
   <div id="app">
-    <div class="banner">
+    <!-- <div class="banner">
       <h1>El Baratón</h1>
       <b-button variant="success">Ir al carrito de compras</b-button>
+    </div> -->
+    <div>
+        <b-navbar toggleable type="light" variant="light">
+            <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
+            <b-navbar-brand>El Baratón</b-navbar-brand>
+            <b-collapse is-nav id="nav_text_collapse">
+                <b-navbar-nav>
+                   <b-button variant="success">Ir al carrito de compras</b-button>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
     </div>
     <div class="bottom">
       To get started, edit <code>./src/components/App.vue</code> and save to reload.<br/>
