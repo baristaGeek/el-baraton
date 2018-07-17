@@ -16,6 +16,7 @@
     "email": "estebanvargas94@gmail.com"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
     "normalize.css": "^7.0.0",
     "object-assign": "^4.1.1",
     "promise-polyfill": "^6.0.2"

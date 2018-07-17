@@ -2,6 +2,7 @@
   <div id="app">
     <div class="banner">
       <h1>El Baratón</h1>
+      <b-button variant="success">Ir al carrito de compras</b-button>
     </div>
     <div class="bottom">
       To get started, edit <code>./src/components/App.vue</code> and save to reload.<br/>
