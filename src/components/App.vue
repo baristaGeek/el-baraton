@@ -16,10 +16,29 @@
         </b-navbar>
     </div>
     <div class="bottom">
-      To get started, edit <code>./src/components/App.vue</code> and save to reload.<br/>
-      <span class="fade">
-        {{products}}
-      </span>
+      <!-- Categories go here -->
+      <div>
+        <b-btn v-b-toggle.collapse1 variant="primary">{{categories.categories[0].name}}</b-btn>
+        <b-collapse id="collapse1" class="mt-2">
+          <b-card>
+            <p class="card-text">Collapse contents Here</p>
+            <b-btn v-b-toggle.collapse1_inner size="sm">{{categories.categories[0].sublevels[0].name}}</b-btn>
+            <b-collapse id=collapse1_inner class="mt-2">
+              <b-card>
+                <p class="card-text">Collapse contents Here</p>
+                <b-btn v-b-toggle.collapse1_inner size="sm">{{categories.categories[0].sublevels[0].sublevels[0].name}}</b-btn>
+                <b-collapse id=collapse1_inner class="mt-2">
+                  <!-- Products go here -->
+                  <b-card>
+                    {{products.products[9].name}}
+                    {{products.products[9].price}}
+                  </b-card>
+                </b-collapse>
+              </b-card>
+            </b-collapse>
+          </b-card>
+        </b-collapse>
+      </div>
     </div>
   </div>
 </template>
@@ -31,8 +50,12 @@ import categoriesJson from '../json-data/categories.json'
     name: 'app',
     data () {
       return {
-        products: [],
-        categories: []
+        products: [{
+          },
+        ],
+        categories: [{
+          },
+        ]
       }
     },
     created () {
