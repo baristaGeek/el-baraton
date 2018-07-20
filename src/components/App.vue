@@ -5,6 +5,8 @@
       <b-button variant="success">Ir al carrito de compras</b-button>
     </div> -->
     <div>
+      <p>localStorage test: {{purchases}}</p>
+      <input v-model='someString'></input>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
@@ -100,7 +102,8 @@ import categoriesJson from '../json-data/categories.json'
         purchases: [
           // {
           // },
-        ]
+        ],
+        someString: ''
       }
     },
     created () {
@@ -108,11 +111,20 @@ import categoriesJson from '../json-data/categories.json'
       vc.products = productsJson
       vc.categories = categoriesJson
     },
+    mounted () {
+      let vc = this
+
+      const purchases = JSON.parse(vc.$localStorage.get('purchases'))
+      if (purchases) {
+        vc.purchases = purchases
+      }
+    },
     methods: {
       addToCart (product) {
         let vc = this
 
         vc.purchases.push(product)
+        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
       },
       removeFromCart (product) {
         let vc = this

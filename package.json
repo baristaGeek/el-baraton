@@ -19,7 +19,8 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "normalize.css": "^7.0.0",
     "object-assign": "^4.1.1",
-    "promise-polyfill": "^6.0.2"
+    "promise-polyfill": "^6.0.2",
+    "vue-localstorage": "^0.6.2"
   },
   "devDependencies": {
     "poi": "^9.0.0",
