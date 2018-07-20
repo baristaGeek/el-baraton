@@ -1,10 +1,13 @@
 <template>
   <li class="node-tree">
-    <span class="label">{{ node.name }}</span>
+    <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px'variant="primary">{{node.name}}</b-btn>
 
-    <ul v-if="node.sublevels && node.sublevels.length">
-      <node v-for="level in node.sublevels" :node="level" :key='level'></node>
-    </ul>
+    <!-- To collapse -->
+    <b-collapse id="collapse1" class="mt-2">
+      <ul v-if="node.sublevels && node.sublevels.length">
+        <node v-for="level in node.sublevels" :node="level" :key='level'></node>
+      </ul>
+    </b-collapse>
   </li>
 </template>
 

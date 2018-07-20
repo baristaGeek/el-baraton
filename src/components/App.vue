@@ -4,7 +4,7 @@
       <h1>El Baratón</h1>
       <b-button variant="success">Ir al carrito de compras</b-button>
     </div> -->
-    <!-- <div>
+    <div>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
@@ -28,15 +28,12 @@
           </ul>
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
         </b-modal>
-      </div> -->
-
-  <!-- <div>
-    <tree :tree-data="tree"></tree>
-  </div> -->
+      </div>
 
   <ul id="example-1">
     <li v-for="c in trie.categories" :key='c'>
       <tree :tree-data="c"></tree>
+    
     </li>
   </ul>
 
