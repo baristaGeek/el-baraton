@@ -17,10 +17,8 @@
     </div>
     <div class="bottom">
       <!-- Shopping cart -->
-        <b-modal id="shopping-cart" title="Confirmación de orden">
+        <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
           <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
-          <div v-if='purchases.length > 0'>{{purchases}}</div>
-
           <ul id="shopping-list">
             <li v-for="item in purchases" :key='item'>
               {{ item.name }}
@@ -28,7 +26,7 @@
               <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
             </li>
           </ul>
-
+          <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
         </b-modal>
       </div>
       <!-- Categories go here -->
@@ -121,6 +119,16 @@ import categoriesJson from '../json-data/categories.json'
 
         let index = vc.purchases.indexOf(product)
         vc.purchases.splice(index, 1)
+      },
+      buy () {
+        let vc = this
+
+        if (vc.purchases.length > 0) {
+          vc.purchases = []
+          alert("Compra exitosa")
+        } else {
+          alert("El carrito está vacío. No se ha efectuado ninguna compra")
+        }
       }
     }
   }
