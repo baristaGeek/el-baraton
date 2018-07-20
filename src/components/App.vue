@@ -131,12 +131,14 @@ import categoriesJson from '../json-data/categories.json'
 
         let index = vc.purchases.indexOf(product)
         vc.purchases.splice(index, 1)
+        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
       },
       buy () {
         let vc = this
 
         if (vc.purchases.length > 0) {
           vc.purchases = []
+          vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
           alert("Compra exitosa")
         } else {
           alert("El carrito está vacío. No se ha efectuado ninguna compra")
