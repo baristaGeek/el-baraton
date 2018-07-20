@@ -30,9 +30,15 @@
         </b-modal>
       </div> -->
 
-  <div>
+  <!-- <div>
     <tree :tree-data="tree"></tree>
-  </div>
+  </div> -->
+
+  <ul id="example-1">
+    <li v-for="t in tree.trees" :key='t'>
+      <tree :tree-data="t"></tree>
+    </li>
+  </ul>
 
       <!-- Categories go here -->
       <!-- <div>
@@ -86,16 +92,32 @@ import Tree from './Tree'
 
 
         tree: {
-          label: "A cool folder",
-          children: [
+          "trees": [
             {
-              label: "A cool sub-folder 1",
+              label: "Has 2 children",
               children: [
-                { label: "A cool sub-sub-folder 1" },
-                { label: "A cool sub-sub-folder 2" }
+                {
+                  label: "A cool sub-folder 1",
+                  children: [
+                    { label: "A cool sub-sub-folder 1" },
+                    { label: "A cool sub-sub-folder 2" }
+                  ]
+                },
+                { label: "This one is not that cool" }
               ]
             },
-            { label: "This one is not that cool" }
+            {
+              label: "Has one child",
+              children: [
+                {
+                  label: "A cool sub-folder 1",
+                  children: [
+                    { label: "A cool sub-sub-folder 1" },
+                    { label: "A cool sub-sub-folder 2" }
+                  ]
+                },
+              ]
+            }
           ]
         },
 
