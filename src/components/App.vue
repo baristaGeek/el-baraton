@@ -5,7 +5,6 @@
       <b-button variant="success">Ir al carrito de compras</b-button>
     </div> -->
     <div>
-      <input v-model='someString'></input>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
@@ -36,12 +35,12 @@
         <!-- Test conditional rendering for categories -->
         <ul id="categories">
           <li v-for="cat in categories.categories" :key='cat'>
-            <b-btn style='margin-bottom: 10px'variant="primary">{{cat.name}}</b-btn>
+            <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px'variant="primary">{{cat.name}}</b-btn>
             <b-collapse id="collapse1" class="mt-2">
               <b-card>
                 <li v-for="sub in cat.sublevels" :key='sub'>
-                  <b-btn style='margin-bottom: 10px' size="sm">{{sub.name}}</b-btn>
-                    <b-collapse id="collapse1" class="mt-2">
+                  <b-btn v-b-toggle.collapse1_inner style='margin-bottom: 10px' size="sm">{{sub.name}}</b-btn>
+                    <b-collapse id="collapse1_inner" class="mt-2">
                       <li v-for="prod in products.products" :key='prod'>
                         <b-card v-if='prod.sublevel_id == sub.id'>
                           {{prod.name}}
@@ -56,29 +55,6 @@
             </b-collapse>
           </li>
         </ul>
-
-        <b-btn v-b-toggle.collapse1 variant="primary">{{categories.categories[0].name}}</b-btn>
-        <b-collapse id="collapse1" class="mt-2">
-          <b-card>
-            <p class="card-text">Collapse contents Here</p>
-            <b-btn v-b-toggle.collapse1_inner size="sm">{{categories.categories[0].sublevels[0].name}}</b-btn>
-            <b-collapse id=collapse1_inner class="mt-2">
-              <b-card>
-                <p class="card-text">Collapse contents Here</p>
-                <b-btn v-b-toggle.collapse1_inner size="sm">{{categories.categories[0].sublevels[0].sublevels[0].name}}</b-btn>
-                <b-collapse id=collapse1_inner class="mt-2">
-
-                  <b-card>
-                    {{products.products[9].name}}
-                    {{products.products[9].price}}
-                    <br/>
-                    <b-button variant="success" v-on:click='addToCart(products.products[9])'>Añadir al carrito de compras</b-button>
-                  </b-card>
-                </b-collapse>
-              </b-card>
-            </b-collapse>
-          </b-card>
-        </b-collapse>
         
       </div>
     </div>
