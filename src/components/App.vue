@@ -5,7 +5,6 @@
       <b-button variant="success">Ir al carrito de compras</b-button>
     </div> -->
     <div>
-      <p>localStorage test: {{purchases}}</p>
       <input v-model='someString'></input>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
