@@ -10,12 +10,27 @@
             <b-navbar-brand>El Baratón</b-navbar-brand>
             <b-collapse is-nav id="nav_text_collapse">
                 <b-navbar-nav>
-                   <b-button variant="success">Ir al carrito de compras</b-button>
+                   <b-button variant="success" v-b-modal.shopping-cart>Ir al carrito de compras</b-button>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
     </div>
     <div class="bottom">
+      <!-- Shopping cart -->
+        <b-modal id="shopping-cart" title="Confirmación de orden">
+          <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
+          <div v-if='purchases.length > 0'>{{purchases}}</div>
+
+          <ul id="shopping-list">
+            <li v-for="item in purchases" :key='item'>
+              {{ item }}
+              <!-- <button v-on:click='removeFromCart(products.products[9])'>Eliminar</button> -->
+              <b-button variant="danger" v-on:click='removeFromCart(products.products[9])'>Eliminar</b-button>
+            </li>
+          </ul>
+
+        </b-modal>
+      </div>
       <!-- Categories go here -->
       <div>
         <b-btn v-b-toggle.collapse1 variant="primary">{{categories.categories[0].name}}</b-btn>
@@ -32,6 +47,8 @@
                   <b-card>
                     {{products.products[9].name}}
                     {{products.products[9].price}}
+                    <br/>
+                    <b-button variant="success" v-on:click='addToCart(products.products[9])'>Añadir al carrito de compras</b-button>
                   </b-card>
                 </b-collapse>
               </b-card>
@@ -55,6 +72,10 @@ import categoriesJson from '../json-data/categories.json'
         ],
         categories: [{
           },
+        ],
+        purchases: [
+          // {
+          // },
         ]
       }
     },
@@ -62,6 +83,19 @@ import categoriesJson from '../json-data/categories.json'
       let vc = this
       vc.products = productsJson
       vc.categories = categoriesJson
+    },
+    methods: {
+      addToCart (product) {
+        let vc = this
+
+        vc.purchases.push(product)
+      },
+      removeFromCart (product) {
+        let vc = this
+
+        let index = vc.purchases.indexOf(product)
+        vc.purchases.splice(index, 1)
+      }
     }
   }
 </script>
