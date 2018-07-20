@@ -35,8 +35,8 @@
   </div> -->
 
   <ul id="example-1">
-    <li v-for="t in tree.trees" :key='t'>
-      <tree :tree-data="t"></tree>
+    <li v-for="c in trie.categories" :key='c'>
+      <tree :tree-data="c"></tree>
     </li>
   </ul>
 
