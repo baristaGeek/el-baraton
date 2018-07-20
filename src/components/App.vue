@@ -4,7 +4,7 @@
       <h1>El Baratón</h1>
       <b-button variant="success">Ir al carrito de compras</b-button>
     </div> -->
-    <div>
+    <!-- <div>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
@@ -16,7 +16,7 @@
         </b-navbar>
     </div>
     <div class="bottom">
-      <!-- Shopping cart -->
+
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
           <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
@@ -28,11 +28,14 @@
           </ul>
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
         </b-modal>
-      </div>
-      <!-- Categories go here -->
-      <div>
+      </div> -->
 
-        <!-- Test conditional rendering for categories -->
+  <div>
+    <tree :tree-data="tree"></tree>
+  </div>
+
+      <!-- Categories go here -->
+      <!-- <div>
         <ul id="categories">
           <li v-for="cat in categories.categories" :key='cat'>
             <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px'variant="primary">{{cat.name}}</b-btn>
@@ -55,15 +58,15 @@
             </b-collapse>
           </li>
         </ul>
-        
-      </div>
+      </div> -->
+
     </div>
-  </div>
 </template>
 
 <script>
 import productsJson from '../json-data/products.json'
 import categoriesJson from '../json-data/categories.json'
+import Tree from './Tree'
   export default {
     name: 'app',
     data () {
@@ -78,8 +81,110 @@ import categoriesJson from '../json-data/categories.json'
           // {
           // },
         ],
-        someString: ''
+
+
+
+
+        tree: {
+          label: "A cool folder",
+          children: [
+            {
+              label: "A cool sub-folder 1",
+              children: [
+                { label: "A cool sub-sub-folder 1" },
+                { label: "A cool sub-sub-folder 2" }
+              ]
+            },
+            { label: "This one is not that cool" }
+          ]
+        },
+
+
+
+trie: { "categories": [
+	{
+		"id": 1,
+		"name": "Bebidas",
+		"sublevels": [
+			{
+				"id": 1,
+				"name": "Gaseosas",
+				"sublevels": [
+					{
+						"id": 2,
+						"name": "Con azúcar"
+					},
+					{
+						"id": 3,
+						"name": "Sin azúcar"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "Desayunos",
+		"sublevels": [
+			{
+				"id": 4,
+				"name": "Fake 1",
+				"sublevels": [
+					{
+						"id": 5,
+						"name": "Fake 2"
+					},
+					{
+						"id": 6,
+						"name": "Fake 3",
+						"sublevels": [
+							{
+								"id": 7,
+								"name": "Fake 4"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": 8,
+		"name": "Almuerzos",
+		"sublevels": [
+			{
+				"id": 9,
+				"name": "Fake 5"
+			},
+			{
+				"id": 10,
+				"name": "Fake 6"
+			}
+		]
+	},
+	{
+		"id": 11,
+		"name": "Vinos",
+		"sublevels": [
+			{
+				"id": 12,
+				"name": "Fake 8"
+			},
+			{
+				"id": 13,
+				"name": "Fake 9"
+			}
+		]
+	}
+]
+}
+
+
+
       }
+    },
+    components: {
+      Tree
     },
     created () {
       let vc = this
