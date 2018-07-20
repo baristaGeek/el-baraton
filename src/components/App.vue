@@ -23,9 +23,9 @@
 
           <ul id="shopping-list">
             <li v-for="item in purchases" :key='item'>
-              {{ item }}
-              <!-- <button v-on:click='removeFromCart(products.products[9])'>Eliminar</button> -->
-              <b-button variant="danger" v-on:click='removeFromCart(products.products[9])'>Eliminar</b-button>
+              {{ item.name }}
+              {{ item.price }}
+              <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
             </li>
           </ul>
 
@@ -48,7 +48,7 @@
                           {{prod.name}}
                           {{prod.price}}
                           <br/>
-                          <b-button variant="success" v-on:click='addToCart(products.products[9])'>Añadir al carrito de compras</b-button>
+                          <b-button variant="success" v-on:click='addToCart(prod)'>Añadir al carrito de compras</b-button>
                         </b-card>
                       </li>
                     </b-collapse>
