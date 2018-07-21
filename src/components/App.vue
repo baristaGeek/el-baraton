@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div class="banner">
-      <h1>El Baratón</h1>
-      <b-button variant="success">Ir al carrito de compras</b-button>
-    </div> -->
     <div>
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
@@ -74,12 +70,6 @@ import Tree from './Tree'
     name: 'app',
     data () {
       return {
-        // products: [{
-        //   },
-        // ],
-        // categories: [{
-        //   },
-        // ],
         purchases: [],
         trie: {}
       }
@@ -89,8 +79,7 @@ import Tree from './Tree'
     },
     created () {
       let vc = this
-      // vc.products = productsJson
-      // vc.categories = categoriesJson
+
       vc.trie = categoriesJson
     },
     mounted () {
