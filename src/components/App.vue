@@ -16,7 +16,7 @@
         </b-navbar>
     </div>
     <div class="bottom">
-      <!-- Shopping cart -->
+
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
           <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
@@ -29,10 +29,16 @@
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
         </b-modal>
       </div>
-      <!-- Categories go here -->
-      <div>
 
-        <!-- Test conditional rendering for categories -->
+  <ul id="example-1">
+    <li v-for="c in trie.categories" :key='c'>
+      <tree :tree-data="c"></tree>
+    
+    </li>
+  </ul>
+
+      <!-- Categories go here -->
+      <!-- <div>
         <ul id="categories">
           <li v-for="cat in categories.categories" :key='cat'>
             <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px'variant="primary">{{cat.name}}</b-btn>
@@ -55,36 +61,37 @@
             </b-collapse>
           </li>
         </ul>
-        
-      </div>
+      </div> -->
+
     </div>
-  </div>
 </template>
 
 <script>
-import productsJson from '../json-data/products.json'
+// import productsJson from '../json-data/products.json'
 import categoriesJson from '../json-data/categories.json'
+import Tree from './Tree'
   export default {
     name: 'app',
     data () {
       return {
-        products: [{
-          },
-        ],
-        categories: [{
-          },
-        ],
-        purchases: [
-          // {
-          // },
-        ],
-        someString: ''
+        // products: [{
+        //   },
+        // ],
+        // categories: [{
+        //   },
+        // ],
+        purchases: [],
+        trie: {}
       }
+    },
+    components: {
+      Tree
     },
     created () {
       let vc = this
-      vc.products = productsJson
-      vc.categories = categoriesJson
+      // vc.products = productsJson
+      // vc.categories = categoriesJson
+      vc.trie = categoriesJson
     },
     mounted () {
       let vc = this
