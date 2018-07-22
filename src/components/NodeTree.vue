@@ -8,8 +8,11 @@
         <node v-for="level in node.sublevels" :node="level" :key='level'></node>
       </ul>
       <!-- Products go here -->
-        <li v-for="prod in products.products" :key='prod' v-if='prod.sublevel_id == node.id'>
-          <b-card>
+        <b-input-group size="lg">
+          <b-form-input v-model='searchedProduct'></b-form-input>
+        </b-input-group>
+        <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
+          <b-card v-if='((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct)))'>
             {{prod.name}}
             {{prod.price}}
             <br/>
@@ -29,7 +32,8 @@ export default {
   },
   data () {
     return {
-      products: [{}]
+      products: [{}],
+      searchedProduct: ''
     }
   },
   created () {
