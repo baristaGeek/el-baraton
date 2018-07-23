@@ -5,8 +5,8 @@
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
             <b-collapse is-nav id="nav_text_collapse">
-                <b-navbar-nav>
-                   <b-button variant="success" v-b-modal.shopping-cart>Ir al carrito de compras</b-button>
+                <b-navbar-nav class="ml-auto">
+                   <b-button variant="success" v-b-modal.shopping-cart><font-awesome-icon icon="shopping-cart" /> Ir al carrito de compras</b-button>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -16,21 +16,21 @@
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
           <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
-            <li v-for="item in purchases" :key='item'>
+            <ul v-for="item in purchases" :key='item'>
               {{ item.name }}
               {{ item.price }}
               <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
-            </li>
+            </ul>
           </ul>
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
         </b-modal>
       </div>
 
   <ul id="example-1">
-    <li v-for="c in trie.categories" :key='c'>
+    <ul v-for="c in trie.categories" :key='c'>
       <tree :tree-data="c"></tree>
     
-    </li>
+    </ul>
   </ul>
 
       <!-- Categories go here -->
@@ -110,9 +110,9 @@ import Tree from './Tree'
         if (vc.purchases.length > 0) {
           vc.purchases = []
           vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-          alert("Compra exitosa")
+          swal("Compra exitosa", "", "success")
         } else {
-          alert("El carrito está vacío. No se ha efectuado ninguna compra")
+          swal("El carrito está vacío. No se ha efectuado ninguna compra", "", "error")
         }
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="tree">
+  <div class="tree" style='text-align:left'>
     <ul class="tree-list">
       <node-tree :node="treeData"></node-tree>
     </ul>

@@ -1,6 +1,6 @@
 <template>
-  <li class="node-tree">
-    <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px' variant="primary">{{node.name}}</b-btn>
+  <ul class="node-tree">
+    <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px; background-color:#f33959; border-color:#f33959' variant="primary">{{node.name}}</b-btn>
 
     <!-- To collapse -->
     <b-collapse id="collapse1" class="mt-2">
@@ -20,37 +20,43 @@
             <option value="0">No Disponible</option>
           </select>
 
-          <label>Filtrar por cantidad: </label>
-          <input v-model='stock'></input>
-
+          <div>
+            <b-form inline>
+              <label>Filtrar por cantidad </label>
+              <b-input v-model='stock' class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2" placeholder="Escriba una cantidad" />
+              
+              <label>Filtrar por rango de precios desde </label>
+              <b-input v-model='lowerPrice' class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2" placeholder="Escriba un precio" />
+              <label>Hasta</label>
+              <b-input v-model='upperPrice' class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2" placeholder="Escriba un precio" />
+            </b-form>
+          </div>
           <br/>
-
-          <label>Filtrar por rango de precios (desde): </label>
-          <input v-model='lowerPrice'></input>
-
-          <label>Filtrar por rango de precios (hasta): </label>
-          <input v-model='upperPrice'></input>
+          <div>
+            <b-form inline>
+              <label>Filtrar por nombre del producto</label>
+              <b-input v-model='searchedProduct' class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2" placeholder="Escriba un nombre" />
+            </b-form>
+          </div>
+          <br/>
         </div>
-        <b-input-group size="lg">
-          <b-form-input v-model='searchedProduct'></b-form-input>
-        </b-input-group>
         <div>
           <b-button variant="secondary" size='sm' v-on:click='orderByStock()'>Ordenar por cantidad</b-button>
           <b-button variant="secondary" size='sm' v-on:click='orderByAvailability()'>Ordenar por disponibilidad</b-button>
           <b-button variant="secondary" size='sm' v-on:click='orderByPrice()'>Ordenar por precio</b-button>
         </div>
-        <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
+        <ul v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
           <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability) || ("2" == availability) ) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
-            {{prod.name}}
+            <strong>{{prod.name}}</strong>
             {{prod.price}}
-            {{prod.available}}
-            {{prod.quantity}}
+            <p>Stock: {{prod.quantity}}</p>
             <br/>
-            <b-button variant="success">Añadir al carrito de compras</b-button>
+            <b-button variant="success" v-if='prod.available'>Añadir al carrito de compras</b-button>
+            <b-button disabled variant="success" v-else>Producto no disponible</b-button>
           </b-card>
-        </li>
+        </ul>
     </b-collapse>
-  </li>
+  </ul>
 </template>
 
 <script>
