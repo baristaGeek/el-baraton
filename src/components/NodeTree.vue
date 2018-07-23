@@ -32,7 +32,7 @@
         </b-input-group>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
           <!-- <p>precio: {{convertPrice(prod.price)}}</p> -->
-          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) )'>
+          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
             {{prod.name}}
             {{prod.price}}
             {{prod.available}}
