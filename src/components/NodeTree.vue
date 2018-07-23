@@ -9,6 +9,9 @@
       </ul>
       <!-- Products go here -->
       <!-- <input v-model='availability'></input> -->
+        <!-- <div>
+          <button v-on:click='orderByStock()'>order stock</button>
+        </div> -->
         <div>
           <label>Filtrar por disponibilidad: </label>
           <select v-model='availability'>
@@ -30,12 +33,18 @@
         <b-input-group size="lg">
           <b-form-input v-model='searchedProduct'></b-form-input>
         </b-input-group>
+        <div>
+          <b-button variant="secondary" size='sm' v-on:click='orderByStock()'>Ordenar por cantidad</b-button>
+          <b-button variant="secondary" size='sm' v-on:click='orderByAvailability()'>Ordenar por disponibilidad</b-button>
+          <b-button variant="secondary" size='sm' v-on:click='orderByStock()'>Ordenar por cantidad</b-button>
+        </div>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
           <!-- <p>precio: {{convertPrice(prod.price)}}</p> -->
           <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
             {{prod.name}}
             {{prod.price}}
             {{prod.available}}
+            {{prod.quantity}}
             <br/>
             <b-button variant="success">Añadir al carrito de compras</b-button>
           </b-card>
@@ -47,6 +56,7 @@
 <script>
 import productsJson from '../json-data/products.json'
 var numeral = require('numeral');
+var _ = require('lodash');
 export default {
   name: "node",
   props: {
@@ -70,7 +80,17 @@ export default {
     convertPrice (price) {
       let myNum = numeral(price)
       return myNum._value
-    }
+    },
+    orderByStock () {
+      let vc = this
+
+      vc.products.products =  _.orderBy(vc.products.products, 'quantity');
+    },   
+    orderByAvailability () {
+      let vc = this
+
+      vc.products.products =  _.orderBy(vc.products.products, 'available');
+    },         
   }
 };
 </script>
