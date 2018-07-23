@@ -8,13 +8,22 @@
         <node v-for="level in node.sublevels" :node="level" :key='level'></node>
       </ul>
       <!-- Products go here -->
+      <!-- <input v-model='availability'></input> -->
+        <div>
+          <label>Filtrar por disponibilidad: </label>
+          <select v-model='availability'>
+            <option value="1">Disponible</option>
+            <option value="0">No Disponible</option>
+          </select>
+        </div>
         <b-input-group size="lg">
           <b-form-input v-model='searchedProduct'></b-form-input>
         </b-input-group>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
-          <b-card v-if='((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct)))'>
+          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) )'>
             {{prod.name}}
             {{prod.price}}
+            {{prod.available}}
             <br/>
             <b-button variant="success">Añadir al carrito de compras</b-button>
           </b-card>
@@ -33,7 +42,12 @@ export default {
   data () {
     return {
       products: [{}],
-      searchedProduct: ''
+      searchedProduct: '',
+      availability: '1',
+      lowerPrice: 0,
+      upperPrice: 999999999999,
+      lowerStock: 0,
+      upperStock: 999999999999,
     }
   },
   created () {
