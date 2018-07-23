@@ -36,7 +36,7 @@
         <div>
           <b-button variant="secondary" size='sm' v-on:click='orderByStock()'>Ordenar por cantidad</b-button>
           <b-button variant="secondary" size='sm' v-on:click='orderByAvailability()'>Ordenar por disponibilidad</b-button>
-          <b-button variant="secondary" size='sm' v-on:click='orderByStock()'>Ordenar por cantidad</b-button>
+          <b-button variant="secondary" size='sm' v-on:click='orderByPrice()'>Ordenar por precio</b-button>
         </div>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
           <!-- <p>precio: {{convertPrice(prod.price)}}</p> -->
@@ -90,7 +90,19 @@ export default {
       let vc = this
 
       vc.products.products =  _.orderBy(vc.products.products, 'available');
-    },         
+    },    
+    orderByPrice () {
+      let vc = this
+      console.log('order price')
+      console.log(numeral(vc.products.products[0].price)._value)
+
+      for (let i=0; i<vc.products.products.length; i++) {
+        vc.products.products[i].price = (numeral(vc.products.products[i].price)._value)
+        console.log(vc.products.products[i].price)
+      }
+
+      vc.products.products =  _.orderBy(vc.products.products, 'price');
+    },             
   }
 };
 </script>
