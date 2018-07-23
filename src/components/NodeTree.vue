@@ -15,6 +15,7 @@
         <div>
           <label>Filtrar por disponibilidad: </label>
           <select v-model='availability'>
+            <option value="2">Todos los productos</option>
             <option value="1">Disponible</option>
             <option value="0">No Disponible</option>
           </select>
@@ -39,8 +40,7 @@
           <b-button variant="secondary" size='sm' v-on:click='orderByPrice()'>Ordenar por precio</b-button>
         </div>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
-          <!-- <p>precio: {{convertPrice(prod.price)}}</p> -->
-          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
+          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability) || ("2" == availability) ) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
             {{prod.name}}
             {{prod.price}}
             {{prod.available}}
@@ -66,7 +66,7 @@ export default {
     return {
       products: [{}],
       searchedProduct: '',
-      availability: '1',
+      availability: '2',
       lowerPrice: 0,
       upperPrice: 20000,
       stock: '',
