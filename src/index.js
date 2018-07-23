@@ -8,6 +8,8 @@ import VueLocalStorage from 'vue-localstorage'
 Vue.use(VueLocalStorage)
 Vue.use(BootstrapVue);
 
+var numeral = require('numeral');
+
 Vue.config.productionTip = false
 
 new Vue({

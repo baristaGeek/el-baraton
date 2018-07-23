@@ -31,7 +31,8 @@
           <b-form-input v-model='searchedProduct'></b-form-input>
         </b-input-group>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
-          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) )'>
+          <!-- <p>precio: {{convertPrice(prod.price)}}</p> -->
+          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) )'>
             {{prod.name}}
             {{prod.price}}
             {{prod.available}}
@@ -45,6 +46,7 @@
 
 <script>
 import productsJson from '../json-data/products.json'
+var numeral = require('numeral');
 export default {
   name: "node",
   props: {
@@ -63,6 +65,12 @@ export default {
   created () {
     let vc = this
     vc.products = productsJson
+  },
+  methods: {
+    convertPrice (price) {
+      let myNum = numeral(price)
+      return myNum._value
+    }
   }
 };
 </script>
