@@ -15,12 +15,23 @@
             <option value="1">Disponible</option>
             <option value="0">No Disponible</option>
           </select>
+
+          <label>Filtrar por cantidad: </label>
+          <input v-model='stock'></input>
+
+          <br/>
+
+          <label>Filtrar por rango de precios (desde): </label>
+          <input v-model='lowerPrice'></input>
+
+          <label>Filtrar por rango de precios (hasta): </label>
+          <input v-model='upperPrice'></input>
         </div>
         <b-input-group size="lg">
           <b-form-input v-model='searchedProduct'></b-form-input>
         </b-input-group>
         <li v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
-          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) )'>
+          <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability)) && ((prod.quantity == stock) || (!stock)) )'>
             {{prod.name}}
             {{prod.price}}
             {{prod.available}}
@@ -45,9 +56,8 @@ export default {
       searchedProduct: '',
       availability: '1',
       lowerPrice: 0,
-      upperPrice: 999999999999,
-      lowerStock: 0,
-      upperStock: 999999999999,
+      upperPrice: 20000,
+      stock: '',
     }
   },
   created () {
