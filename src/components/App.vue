@@ -22,7 +22,7 @@
               <b-button variant="danger" v-on:click='deleteFromCart(item)'>Eliminar</b-button>
             </ul>
           </ul>
-          <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
+          <b-btn class="mt-3" variant="success" block v-on:click='clearCart'>Confirmar Compra</b-btn>
         </b-modal>
       </div>
 
@@ -48,9 +48,6 @@ import { mapGetters, mapActions } from 'vuex'
         trie: {}
       }
     },
-    computed: mapGetters([
-      'evenOrOdd'
-    ]),
     components: {
       Tree
     },
@@ -58,30 +55,12 @@ import { mapGetters, mapActions } from 'vuex'
       let vc = this
 
       vc.trie = categoriesJson
-    },
-    mounted () {
-      let vc = this
-
-      const purchases = JSON.parse(vc.$localStorage.get('purchases'))
-      if (purchases) {
-        vc.purchases = purchases
-      }
-    },    
+    }, 
     methods: {
       ...mapActions([
         'deleteFromCart',
-      ]),   
-      buy () {
-        let vc = this
-
-        if (vc.purchases.length > 0) {
-          vc.purchases = []
-          vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-          swal("Compra exitosa", "", "success")
-        } else {
-          swal("El carrito está vacío. No se ha efectuado ninguna compra", "", "error")
-        }
-      }
+        'clearCart'
+      ]),
     }
   }
 </script>

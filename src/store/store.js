@@ -14,10 +14,6 @@ const state = {
   products: []
 }
 
-const getters = {
-    evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
-}
-
 const mutations = {
   [types.ADD_TO_CART] (state, { prod }) {
       state.products.push(prod)
@@ -25,6 +21,9 @@ const mutations = {
   [types.DELETE_FROM_CART] (state, { prod }) {
     let index = state.products.indexOf(prod)
     state.products.splice(index, 1)
+  },
+  [types.CLEAR_CART] (state, { prod }) {
+    state.products = []
   }
 } 
 
@@ -39,11 +38,14 @@ const actions = {
       prod
 		})
   },
+	clearCart({ commit }){
+		commit(types.DELETE_FROM_CART, {
+		})
+  },
 }
 
 export default new Vuex.Store({
   state,
-  getters,
   mutations,
   actions,
   plugins: [vuexPersist.plugin]
