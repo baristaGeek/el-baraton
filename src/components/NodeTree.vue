@@ -7,18 +7,15 @@
       <ul v-if="node.sublevels && node.sublevels.length">
         <node v-for="level in node.sublevels" :node="level" :key='level'></node>
       </ul>
-      <!-- Products go here -->
-      <!-- <input v-model='availability'></input> -->
-        <!-- <div>
-          <button v-on:click='orderByStock()'>order stock</button>
-        </div> -->
         <div>
-          <label>Filtrar por disponibilidad: </label>
-          <select v-model='availability'>
-            <option value="2">Todos los productos</option>
-            <option value="1">Disponible</option>
-            <option value="0">No Disponible</option>
-          </select>
+          <div>
+            <label>Filtrar por disponibilidad </label>
+            <b-form-select v-model="availability" class="mb-3" size='sm'>
+              <option value="2">Todos los productos</option>
+              <option value="1">Disponible</option>
+              <option value="0">No Disponible</option>
+            </b-form-select>
+          </div>
 
           <div>
             <b-form inline>
