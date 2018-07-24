@@ -1,11 +1,6 @@
 <template>
   <ul class="node-tree">
     <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px; background-color:#f33959; border-color:#f33959' variant="primary">{{node.name}}</b-btn>
-
-        <button class="btn btn-success" @click="addToCart">+</button>
-        <button class="btn btn-danger" @click="decrement">-</button>
-
-
     <!-- To collapse -->
     <b-collapse id="collapse1" class="mt-2">
       <ul v-if="node.sublevels && node.sublevels.length">
