@@ -2,7 +2,8 @@
   <ul class="node-tree">
     <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px; background-color:#f33959; border-color:#f33959' variant="primary">{{node.name}}</b-btn>
 
-        <h3>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</h3>
+        <button class="btn btn-success" @click="addToCart">+</button>
+        <button class="btn btn-danger" @click="decrement">-</button>
 
 
     <!-- To collapse -->
@@ -84,6 +85,10 @@ export default {
     vc.products = productsJson
   },
   methods: {
+    ...mapActions([
+      'addToCart',
+      'decrement',
+    ]),    
     convertPrice (price) {
       let myNum = numeral(price)
       return myNum._value
