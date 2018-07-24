@@ -19,7 +19,7 @@
             <ul v-for="(item, idx) in $store.state.products" :key='idx'>
               {{ item.name }}
               {{ item.price }}
-              <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
+              <b-button variant="danger" v-on:click='deleteFromCart(item)'>Eliminar</b-button>
             </ul>
           </ul>
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
@@ -96,6 +96,9 @@ import { mapGetters, mapActions } from 'vuex'
       }
     },    
     methods: {
+      ...mapActions([
+        'deleteFromCart',
+      ]),   
       addToCart (product) {
         let vc = this
 

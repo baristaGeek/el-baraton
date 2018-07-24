@@ -37,6 +37,10 @@ const mutations = {
       //     record.quantity++
       //   }
       // }
+  },
+  [types.DELETE_FROM_CART] (state, { prod }) {
+    let index = state.products.indexOf(prod)
+    state.products.splice(index, 1)
   }
 } 
 
@@ -50,7 +54,12 @@ const actions = {
 		commit(types.ADD_TO_CART, {
       prod
 		})
-	}
+  },
+	deleteFromCart({ commit }, prod){
+		commit(types.DELETE_FROM_CART, {
+      prod
+		})
+  },
 }
 
 export default new Vuex.Store({

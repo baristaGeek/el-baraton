@@ -87,7 +87,6 @@ export default {
   methods: {
     ...mapActions([
       'addToCart',
-      'decrement',
     ]),    
     convertPrice (price) {
       let myNum = numeral(price)
