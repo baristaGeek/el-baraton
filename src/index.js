@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vuex from 'vuex'
-import store from './store'
+import store from './store/store'
 
 Vue.use(Vuex);
 Vue.use(VueLocalStorage);

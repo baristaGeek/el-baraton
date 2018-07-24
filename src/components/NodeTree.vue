@@ -52,7 +52,7 @@
             {{prod.price}}
             <p>Stock: {{prod.quantity}}</p>
             <br/>
-            <b-button variant="success" v-if='prod.available'>Añadir al carrito de compras</b-button>
+            <b-button variant="success" v-if='prod.available' @click='addToCart(prod)'>Añadir al carrito de compras</b-button>
             <b-button disabled variant="success" v-else>Producto no disponible</b-button>
           </b-card>
         </ul>
