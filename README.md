@@ -5,6 +5,12 @@
 ## Instrucciones para correr
 
 ```bash
+# Se requiere yarn para correr este proyecto. Por favor instalarlo
+https://yarnpkg.com/lang/en/docs/install/#mac-stable
+
+# Instale las dependencias
+yarn
+
 # Escribir este comando en la consola
 yarn run dev
 
