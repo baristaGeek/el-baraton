@@ -23,10 +23,10 @@ const getters = {
 
 const mutations = {
   
-    [types.ADD_TO_CART] (state, { name }) {
+    [types.ADD_TO_CART] (state, { prod }) {
         // const record = state.products.find(p => p.id === id)
 
-        state.products.push(name)
+        state.products.push(prod)
   
       //   if (!record) {
       //     state.added.push({
@@ -48,7 +48,7 @@ const mutations = {
 const actions = {
 	addToCart({ commit }, prod){
 		commit(types.ADD_TO_CART, {
-		  name: prod.name
+      prod
 		})
 	}
 }

@@ -14,10 +14,9 @@
     <div class="bottom">
 
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
-          <h3>Clicked: {{ $store.state.products}}.</h3>
-          <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
+          <p v-if='$store.state.products == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
-            <ul v-for="(item, idx) in purchases" :key='idx'>
+            <ul v-for="(item, idx) in $store.state.products" :key='idx'>
               {{ item.name }}
               {{ item.price }}
               <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
