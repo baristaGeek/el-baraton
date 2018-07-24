@@ -5,7 +5,7 @@
     <!-- To collapse -->
     <b-collapse id="collapse1" class="mt-2">
       <ul v-if="node.sublevels && node.sublevels.length">
-        <node v-for="level in node.sublevels" :node="level" :key='level'></node>
+        <node v-for="(level, idx) in node.sublevels" :node="level" :key='idx'></node>
       </ul>
         <div>
           <div>
@@ -42,7 +42,7 @@
           <b-button variant="secondary" size='sm' v-on:click='orderByAvailability()'>Ordenar por disponibilidad</b-button>
           <b-button variant="secondary" size='sm' v-on:click='orderByPrice()'>Ordenar por precio</b-button>
         </div>
-        <ul v-for="prod in products.products" :key='prod' v-if='(prod.sublevel_id == node.id)'>
+        <ul v-for="(prod, idx) in products.products" :key='idx' v-if='(prod.sublevel_id == node.id)'>
           <b-card v-if='( ((!searchedProduct) || (prod.name.includes(searchedProduct) || (prod.name == searchedProduct))) && ((prod.available == availability) || ("2" == availability) ) && ((prod.quantity == stock) || (!stock)) && ((convertPrice(prod.price) >= lowerPrice) && (convertPrice(prod.price) <= upperPrice)) || (!upperPrice && !lowerPrice) )'>
             <strong>{{prod.name}}</strong>
             {{prod.price}}

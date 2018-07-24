@@ -16,7 +16,7 @@
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
           <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
-            <ul v-for="item in purchases" :key='item'>
+            <ul v-for="(item, idx) in purchases" :key='idx'>
               {{ item.name }}
               {{ item.price }}
               <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
@@ -27,7 +27,7 @@
       </div>
 
   <ul id="example-1">
-    <ul v-for="c in trie.categories" :key='c'>
+    <ul v-for="(c, idx) in trie.categories" :key='idx'>
       <tree :tree-data="c"></tree>
     
     </ul>
