@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <div>
+        <h3>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</h3>
+        <button class="btn btn-success" @click="increment">+</button>
+        <button class="btn btn-danger" @click="decrement">-</button>
+        <button class="btn" @click="incrementIfOdd">Increment if odd</button>
+        <button class="btn" @click="incrementAsync">Increment async</button>
+        
         <b-navbar toggleable type="light" variant="light">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand>El Baratón</b-navbar-brand>
@@ -66,6 +72,8 @@
 // import productsJson from '../json-data/products.json'
 import categoriesJson from '../json-data/categories.json'
 import Tree from './Tree'
+import { mapGetters, mapActions } from 'vuex'
+
   export default {
     name: 'app',
     data () {
@@ -74,6 +82,9 @@ import Tree from './Tree'
         trie: {}
       }
     },
+    computed: mapGetters([
+      'evenOrOdd'
+    ]),
     components: {
       Tree
     },
@@ -90,32 +101,40 @@ import Tree from './Tree'
         vc.purchases = purchases
       }
     },
-    methods: {
-      addToCart (product) {
-        let vc = this
+    
+    methods: mapActions([
+      'increment',
+      'decrement',
+      'incrementIfOdd',
+      'incrementAsync'
+    ]),
+    
+    // methods: {
+    //   addToCart (product) {
+    //     let vc = this
 
-        vc.purchases.push(product)
-        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-      },
-      removeFromCart (product) {
-        let vc = this
+    //     vc.purchases.push(product)
+    //     vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
+    //   },
+    //   removeFromCart (product) {
+    //     let vc = this
 
-        let index = vc.purchases.indexOf(product)
-        vc.purchases.splice(index, 1)
-        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-      },
-      buy () {
-        let vc = this
+    //     let index = vc.purchases.indexOf(product)
+    //     vc.purchases.splice(index, 1)
+    //     vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
+    //   },
+    //   buy () {
+    //     let vc = this
 
-        if (vc.purchases.length > 0) {
-          vc.purchases = []
-          vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-          swal("Compra exitosa", "", "success")
-        } else {
-          swal("El carrito está vacío. No se ha efectuado ninguna compra", "", "error")
-        }
-      }
-    }
+    //     if (vc.purchases.length > 0) {
+    //       vc.purchases = []
+    //       vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
+    //       swal("Compra exitosa", "", "success")
+    //     } else {
+    //       swal("El carrito está vacío. No se ha efectuado ninguna compra", "", "error")
+    //     }
+    //   }
+    // }
   }
 </script>
 

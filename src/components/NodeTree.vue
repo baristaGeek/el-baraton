@@ -2,6 +2,9 @@
   <ul class="node-tree">
     <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px; background-color:#f33959; border-color:#f33959' variant="primary">{{node.name}}</b-btn>
 
+        <h3>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</h3>
+
+
     <!-- To collapse -->
     <b-collapse id="collapse1" class="mt-2">
       <ul v-if="node.sublevels && node.sublevels.length">
@@ -60,6 +63,7 @@
 import productsJson from '../json-data/products.json'
 var numeral = require('numeral');
 var _ = require('lodash');
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: "node",
   props: {
