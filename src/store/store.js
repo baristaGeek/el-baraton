@@ -39,7 +39,7 @@ const actions = {
 		})
   },
 	clearCart({ commit }){
-		commit(types.DELETE_FROM_CART, {
+		commit(types.CLEAR_CART, {
 		})
   },
 }

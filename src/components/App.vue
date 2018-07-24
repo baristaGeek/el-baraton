@@ -22,7 +22,8 @@
               <b-button variant="danger" v-on:click='deleteFromCart(item)'>Eliminar</b-button>
             </ul>
           </ul>
-          <b-btn class="mt-3" variant="success" block v-on:click='clearCart'>Confirmar Compra</b-btn>
+          <b-btn v-if='$store.state.products.length > 0' class="mt-3" variant="success" block v-on:click='clearCart(); buy()'>Confirmar Compra</b-btn>
+          <b-btn v-if='$store.state.products.length == 0' class="mt-3" variant="success" block v-on:click='alertEmptyCar()'>Confirmar Compra</b-btn>
         </b-modal>
       </div>
 
@@ -61,6 +62,12 @@ import { mapGetters, mapActions } from 'vuex'
         'deleteFromCart',
         'clearCart'
       ]),
+      buy () {
+        swal("Compra exitosa", "", "success")
+      },
+      alertEmptyCar () {
+        swal("El carrito está vacío. No se ha efectuado ninguna compra", "", "error")
+      }
     }
   }
 </script>
