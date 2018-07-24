@@ -14,12 +14,12 @@
     <div class="bottom">
 
         <b-modal id="shopping-cart" title="Confirmación de orden" hide-footer>
-          <p v-if='purchases.length == 0' class="my-4">¡Tu carrito está vacío!</p>
+          <p v-if='$store.state.products == 0' class="my-4">¡Tu carrito está vacío!</p>
           <ul id="shopping-list">
-            <ul v-for="(item, idx) in purchases" :key='idx'>
+            <ul v-for="(item, idx) in $store.state.products" :key='idx'>
               {{ item.name }}
               {{ item.price }}
-              <b-button variant="danger" v-on:click='removeFromCart(item)'>Eliminar</b-button>
+              <b-button variant="danger" v-on:click='deleteFromCart(item)'>Eliminar</b-button>
             </ul>
           </ul>
           <b-btn class="mt-3" variant="success" block v-on:click="buy">Confirmar Compra</b-btn>
@@ -66,6 +66,8 @@
 // import productsJson from '../json-data/products.json'
 import categoriesJson from '../json-data/categories.json'
 import Tree from './Tree'
+import { mapGetters, mapActions } from 'vuex'
+
   export default {
     name: 'app',
     data () {
@@ -74,6 +76,9 @@ import Tree from './Tree'
         trie: {}
       }
     },
+    computed: mapGetters([
+      'evenOrOdd'
+    ]),
     components: {
       Tree
     },
@@ -89,8 +94,11 @@ import Tree from './Tree'
       if (purchases) {
         vc.purchases = purchases
       }
-    },
+    },    
     methods: {
+      ...mapActions([
+        'deleteFromCart',
+      ]),   
       addToCart (product) {
         let vc = this
 

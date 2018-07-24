@@ -1,7 +1,6 @@
 <template>
   <ul class="node-tree">
     <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px; background-color:#f33959; border-color:#f33959' variant="primary">{{node.name}}</b-btn>
-
     <!-- To collapse -->
     <b-collapse id="collapse1" class="mt-2">
       <ul v-if="node.sublevels && node.sublevels.length">
@@ -48,7 +47,7 @@
             {{prod.price}}
             <p>Stock: {{prod.quantity}}</p>
             <br/>
-            <b-button variant="success" v-if='prod.available'>Añadir al carrito de compras</b-button>
+            <b-button variant="success" v-if='prod.available' @click='addToCart(prod)'>Añadir al carrito de compras</b-button>
             <b-button disabled variant="success" v-else>Producto no disponible</b-button>
           </b-card>
         </ul>
@@ -60,6 +59,7 @@
 import productsJson from '../json-data/products.json'
 var numeral = require('numeral');
 var _ = require('lodash');
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: "node",
   props: {
@@ -80,6 +80,9 @@ export default {
     vc.products = productsJson
   },
   methods: {
+    ...mapActions([
+      'addToCart',
+    ]),    
     convertPrice (price) {
       let myNum = numeral(price)
       return myNum._value
