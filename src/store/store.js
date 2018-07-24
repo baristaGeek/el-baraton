@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as types from './mutation-types'
+import VuexPersist from 'vuex-persist'
 
 Vue.use(Vuex)
+
+const vuexPersist = new VuexPersist({
+  key: 'my-app',
+  storage: localStorage
+})
 
 const state = {
   products: []
@@ -39,5 +45,6 @@ export default new Vuex.Store({
   state,
   getters,
   mutations,
-  actions
+  actions,
+  plugins: [vuexPersist.plugin]
 })
