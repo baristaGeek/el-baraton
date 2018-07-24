@@ -32,33 +32,6 @@
     
     </ul>
   </ul>
-
-      <!-- Categories go here -->
-      <!-- <div>
-        <ul id="categories">
-          <li v-for="cat in categories.categories" :key='cat'>
-            <b-btn v-b-toggle.collapse1 style='margin-bottom: 10px'variant="primary">{{cat.name}}</b-btn>
-            <b-collapse id="collapse1" class="mt-2">
-              <b-card>
-                <li v-for="sub in cat.sublevels" :key='sub'>
-                  <b-btn v-b-toggle.collapse1_inner style='margin-bottom: 10px' size="sm">{{sub.name}}</b-btn>
-                    <b-collapse id="collapse1_inner" class="mt-2">
-                      <li v-for="prod in products.products" :key='prod'>
-                        <b-card v-if='prod.sublevel_id == sub.id'>
-                          {{prod.name}}
-                          {{prod.price}}
-                          <br/>
-                          <b-button variant="success" v-on:click='addToCart(prod)'>Añadir al carrito de compras</b-button>
-                        </b-card>
-                      </li>
-                    </b-collapse>
-                </li>
-              </b-card>
-            </b-collapse>
-          </li>
-        </ul>
-      </div> -->
-
     </div>
 </template>
 
@@ -72,7 +45,6 @@ import { mapGetters, mapActions } from 'vuex'
     name: 'app',
     data () {
       return {
-        purchases: [],
         trie: {}
       }
     },
@@ -99,19 +71,6 @@ import { mapGetters, mapActions } from 'vuex'
       ...mapActions([
         'deleteFromCart',
       ]),   
-      addToCart (product) {
-        let vc = this
-
-        vc.purchases.push(product)
-        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-      },
-      removeFromCart (product) {
-        let vc = this
-
-        let index = vc.purchases.indexOf(product)
-        vc.purchases.splice(index, 1)
-        vc.$localStorage.set('purchases', JSON.stringify(vc.purchases))
-      },
       buy () {
         let vc = this
 
